@@ -1,0 +1,2 @@
+1. Za utre napravete istovo sto go napraviv jas, megutoa so vasi credentials i sender email na mailgun
+OPTIONAL: Napravete istazuvanje za drugi third-party APIs za prakanje mejlovi kako mailgun (na primer Sendgrid) 

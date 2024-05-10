@@ -17,6 +17,9 @@ const mailTemplate = {
 }
 
 const sendMail = async (to, type, data) => {
+    // to -> to whom the mail is sent
+    // type -> it will refer to the corresponding template based on the type 
+    // data -> data sent from the user
     const mg = mailgun.client({
         username: "api",
         key: 
@@ -28,15 +31,18 @@ const sendMail = async (to, type, data) => {
     let templatePath = `${__dirname}/../../email_templates/${mailTemplate[type].template}`;
     let content = await readTemplate(templatePath);
 
-    for (let i in data){
-        //first_name
-        //last_name
-        //email
-        //trae 3 pati
+    const { user, link } = data;
+    const userFullName = user.fullname.split(" ");
+    const firstName = userFullName[0];
+    const lastName = userFullName[1];
 
-        let regex = new RegExp(`\{\{${i}\}\}`, "g");  // _email@gmail.com 
-        content = content.replace(regex, data[i]);
-    };
+    let regexName = new RegExp(`\{\{{first_name\}\}`, "g");
+    let regexSurname = new RegExp(`\{\{{last_name\}\}`, "g");
+    let regexLink = new RegExp(`\{\{{link\}\}`, "g");
+
+    content = content.replace(regexName, firstName);
+    content = content.replace(regexSurname, lastName);
+    content = content.replace(regexLink, link);
 
     let options = {
         from: config.getSection("development").sender_email,

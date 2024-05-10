@@ -6,12 +6,12 @@ const mailgun = new Mailgun(formData);
 const config = require("../config");
 
 const mailTemplate = {
-    PASWORD_TEMPLATE: {
+    PASSWORD_RESET: {
         title: "Your password reset link has been generated",
         template: "reset_password.html",
     },
     WELCOME: {
-        title: "Welcome to the class of learning mailgun!",
+        title: "Welcome to the class of learning mailgun",
         template: "welcome.html",
     }
 }
@@ -22,9 +22,9 @@ const sendMail = async (to, type, data) => {
     // data -> data sent from the user
     const mg = mailgun.client({
         username: "api",
-        key: 
-            config.getSection("development").api_key || 
-            "" // api_key value goes here
+        key:
+            config.getSection("development").api_key ||
+            "" //api_key value goes here
     });
 
     let title = mailTemplate[type].title;
@@ -36,9 +36,9 @@ const sendMail = async (to, type, data) => {
     const firstName = userFullName[0];
     const lastName = userFullName[1];
 
-    let regexName = new RegExp(`\{\{{first_name\}\}`, "g");
-    let regexSurname = new RegExp(`\{\{{last_name\}\}`, "g");
-    let regexLink = new RegExp(`\{\{{link\}\}`, "g");
+    let regexName = new RegExp(`\{\{first_name\}\}`, "g");
+    let regexSurname = new RegExp(`\{\{last_name\}\}`, "g");
+    let regexLink = new RegExp(`\{\{link\}\}`, "g");
 
     content = content.replace(regexName, firstName);
     content = content.replace(regexSurname, lastName);
@@ -48,8 +48,8 @@ const sendMail = async (to, type, data) => {
         from: config.getSection("development").sender_email,
         to: to,
         subject: title,
-        html: content
-    }
+        html: content,
+    };
 
     try{
         const res = await mg.messages.create(
@@ -58,7 +58,6 @@ const sendMail = async (to, type, data) => {
         );
 
         return res;
-
     }catch(err){
         throw err;
     }
@@ -72,7 +71,7 @@ const readTemplate = async (file) => {
             return success(data);
         });
     });
-};
+}
 
 module.exports = {
     sendMail,

@@ -96,6 +96,7 @@ const forgetPassword = async (req, res) => {
         await sendMail(user.email, "PASSWORD_RESET", { user, link });
         res.status(200).send("Password reset link has been sent to your email... ");
     }catch(err){
+        console.log(err);
         return res.status(500).send("Message not sent!");
     }
 }

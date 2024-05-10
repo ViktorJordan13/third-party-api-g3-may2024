@@ -1,0 +1,21 @@
+{
+    "development": {
+        "port": "brojot na portot na koj sto ke vi e localhost ili hostingot ako vi e hostirana aplikacijata", 
+        "api_key": "api key sto vie samite ke si go napravite na mailgun",
+        "domain": "sandbox domenot sto ke vi se kreira stom napravite account na mailgun",
+        "sender_email": "verified sender sto ke go napravite vo authorized recipients na mailgun",
+        "MONGO_USERNAME": "vaseto username za vasiot mongo cluster",
+        "MONGO_PASSWORD": "vasiot password za toj cluster na mongo",
+        "jwt_key": "secret klucot za generiranje na vasite json web tokens"
+    },
+    "integration": {
+        "port": 9000,
+        "MONGO_USERNAME": "tester",
+        "MONGO_PASSWORD": "testerpass"
+    },
+    "production": {
+        "port": 8080,
+        "MONGO_USERNAME": "admin",
+        "MONGO_PASSWORD": "adminpass"
+    }
+}
